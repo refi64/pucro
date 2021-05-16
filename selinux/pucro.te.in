@@ -1,0 +1,16 @@
+policy_module(pucro, @version@)
+
+require {
+  type init_t;
+  type system_dbusd_t;
+  type unconfined_t;
+}
+
+type pucrod_t;
+type pucrod_exec_t;
+
+init_daemon_domain(pucrod_t, pucrod_exec_t)
+unconfined_domain(pucrod_t)
+
+allow init_t pucrod_t:unix_stream_socket { ioctl read write };
+allow system_dbusd_t pucrod_t:unix_stream_socket { read write };

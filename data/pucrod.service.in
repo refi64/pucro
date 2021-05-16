@@ -1,0 +1,14 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+[Unit]
+Description=Map mouse buttons to commands
+Documentation=man:pucrod.service(8)
+
+[Service]
+Type=notify
+ExecStart=@prefix@/@libexecdir@/pucro/pucrod
+
+[Install]
+WantedBy=multi-user.target
