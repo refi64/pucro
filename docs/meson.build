@@ -2,8 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-mrkd = find_program('mrkd', required : get_option('man'))
-gzip = find_program('gzip', required : get_option('man'))
+mrkd = find_program('mrkd', required : get_option('man').enabled())
+gzip = find_program('gzip', required : get_option('man').enabled())
 
 if mrkd.found() and gzip.found()
   foreach page : ['pucro.conf.5', 'pucrod.service.8']
