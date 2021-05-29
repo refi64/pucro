@@ -10,7 +10,7 @@ deps = [
   dependency('libconfuse', required : true),
   dependency('libevdev', required : true),
   dependency('libinput', required : true),
-  dependency('libsystemd', required : true),
+  dependency('libsystemd', required : true, version : '>= 248'),
   dependency('libudev', required : true),
 ]
 

@@ -128,37 +128,13 @@ static sd_bus *ConnectToUserBus(const char *user) {
   CLEANUP(sd_bus_unrefp) sd_bus *bus = NULL;
   int rc = 0;
 
-  if ((rc = sd_bus_new(&bus)) < 0) {
-    LogErrno(-rc, "Failed to create bus");
-    return NULL;
-  }
-
-  if ((rc = sd_bus_set_bus_client(bus, true)) < 0) {
-    LogErrno(-rc, "Failed to set bus client");
-    return NULL;
-  }
-
-  CLEANUP_AUTOFREE char *user_arg_value = NULL;
-  if (asprintf(&user_arg_value, "-pUser=%s", user) == -1) {
+  CLEANUP_AUTOFREE char *machine = NULL;
+  if (asprintf(&machine, "%s@", user) == -1) {
     abort();
   }
 
-  char *argv[] = {"systemd-run",
-                  "-PGq",
-                  "--wait",
-                  user_arg_value,
-                  "-pPAMName=login",
-                  "systemd-stdio-bridge",
-                  "-punix:path=${XDG_RUNTIME_DIR}/bus",
-                  NULL};
-
-  if ((rc = sd_bus_set_exec(bus, "systemd-run", argv)) < 0) {
-    LogErrno(-rc, "Failed to set bus exec");
-    return NULL;
-  }
-
-  if ((rc = sd_bus_start(bus)) < 0) {
-    LogErrno(-rc, "Failed to start bus");
+  if ((rc = sd_bus_open_user_machine(&bus, machine)) < 0) {
+    LogErrno(-rc, "Failed to connect to %s bus", user);
     return NULL;
   }
 
