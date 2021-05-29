@@ -9,6 +9,7 @@ Documentation=man:pucrod.service(8)
 [Service]
 Type=notify
 ExecStart=@prefix@/@libexecdir@/pucro/pucrod
+ExecReload=kill -HUP $MAINPID
 
 [Install]
 WantedBy=multi-user.target
