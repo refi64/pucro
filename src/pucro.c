@@ -81,7 +81,7 @@ static void LookupRuleAndDispatch(EventHandlerData *handler_data, const char *se
     return;
   }
 
-  const char *user = SeatMonitor_GetUser(handler_data->seat_monitor, seat);
+  CLEANUP_AUTOFREE char *user = SeatMonitor_GetUser(handler_data->seat_monitor, seat);
   if (user == NULL) {
     LogError("Failed to get user for seat %s", seat_id);
     return;

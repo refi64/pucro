@@ -40,7 +40,7 @@ void SeatMonitor_SetUserData(SeatMonitor *monitor, void *userdata,
 const SeatMonitorSeat *SeatMonitor_GetSeats(SeatMonitor *monitor);
 const SeatMonitorSeat *SeatMonitor_FindSeat(SeatMonitor *monitor, const char *seat_id);
 
-const char *SeatMonitor_GetUser(SeatMonitor *monitor, const SeatMonitorSeat *seat);
+char *SeatMonitor_GetUser(SeatMonitor *monitor, const SeatMonitorSeat *seat);
 
 void SeatMonitor_Free(SeatMonitor *monitor);
 

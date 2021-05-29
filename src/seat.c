@@ -197,7 +197,7 @@ const SeatMonitorSeat *SeatMonitor_FindSeat(SeatMonitor *monitor, const char *se
   return match;
 }
 
-const char *SeatMonitor_GetUser(SeatMonitor *monitor, const SeatMonitorSeat *seat) {
+char *SeatMonitor_GetUser(SeatMonitor *monitor, const SeatMonitorSeat *seat) {
   int rc = 0;
   CLEANUP(sd_bus_error_free) sd_bus_error error = SD_BUS_ERROR_NULL;
 
