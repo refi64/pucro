@@ -15,9 +15,9 @@ if mrkd.found() and gzip.found()
 
     gz = page + '.gz'
     custom_target(gz,
-      input : ['../build-aux/compress.sh', roff_target],
+      input : roff_target,
       output : gz,
-      command : ['@INPUT0@', gzip, '@INPUT1@', '@OUTPUT@'],
+      command : ['../build-aux/compress.sh', gzip, '@INPUT@', '@OUTPUT@'],
       install : true,
       install_dir : get_option('datadir') / 'man' / ('man' + man_section))
 

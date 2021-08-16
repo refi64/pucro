@@ -28,8 +28,8 @@ pucro_pp = custom_target('pucro.pp',
       '--pp', '@OUTPUT@'])
 
 custom_target('pucro.pp.bz2',
-  input : ['../build-aux/compress.sh', pucro_pp],
+  input : pucro_pp,
   output : 'pucro.pp.bz2',
-  command : ['@INPUT0@', bzip2, '@INPUT1@', '@OUTPUT@'],
+  command : ['../build-aux/compress.sh', bzip2, '@INPUT@', '@OUTPUT@'],
   install : true,
   install_dir : get_option('datadir') / 'selinux' / 'packages')
